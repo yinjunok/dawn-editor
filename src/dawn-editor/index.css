@@ -1,0 +1,23 @@
+.dawn-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f7f7f7;
+}
+
+.dawn-content {
+  width: 816px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.dawn-toolbar {
+  text-align: center;
+}
+
+.dawn-tool-button {
+  border: 1px solid transparent;
+  
+}
