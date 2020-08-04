@@ -8,12 +8,18 @@ import {
   MdFormatBold,
   MdFormatItalic,
   MdFormatUnderlined,
-  MdStrikethroughS,
+  MdFormatStrikethrough,
   MdTextFormat,
   MdBrush,
   MdFormatListBulleted,
   MdFormatListNumbered,
+  MdFormatIndentIncrease,
+  MdFormatIndentDecrease,
+  MdFormatLineSpacing,
+  MdFindInPage,
 } from 'react-icons/md'
+// import AccessAlarmIcon from '@material-ui/icons/AccessAlarmsOutlined';
+import { AccessAlarmsOutlined } from '@material-ui/icons';
 
 const ToolButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
@@ -34,7 +40,7 @@ const Divider = () => {
       style={{
         display: 'inline-block',
         width: 1,
-        height: '1em',
+        height: '1.2em',
         margin: '0 16px',
         verticalAlign: 'middle',
         background: 'rgba(0, 0, 0, .06)'
@@ -76,7 +82,7 @@ const Toolbar: FC = () => {
         <MdFormatUnderlined />
       </ToolButton>
       <ToolButton>
-        <MdStrikethroughS />
+        <MdFormatStrikethrough />
       </ToolButton>
       <ToolButton>
         <MdTextFormat />
@@ -92,6 +98,28 @@ const Toolbar: FC = () => {
       </ToolButton>
       <ToolButton>
         <MdFormatListBulleted />
+      </ToolButton>
+      <ToolButton>
+        <MdFormatIndentIncrease />
+      </ToolButton>
+      <ToolButton>
+        <MdFormatIndentDecrease />
+      </ToolButton>
+      <ToolButton>
+        <MdFormatLineSpacing />
+        <MdArrowDropDown />
+      </ToolButton>
+      <Divider />
+      <ToolButton>
+        插入
+        <MdArrowDropDown />
+      </ToolButton>
+      <Divider />
+      <ToolButton>
+        <MdFindInPage />
+      </ToolButton>
+      <ToolButton>
+        <AccessAlarmsOutlined />
       </ToolButton>
     </div>
   )
