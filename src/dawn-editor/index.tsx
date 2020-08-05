@@ -6,7 +6,10 @@ import { withHistory } from 'slate-history'
 import Toolbar from './Toolbar'
 import './index.css'
 
-const HOTKEYS = {
+type TFormat = 'bold' | 'italic' | 'underline' | 'code' | 'heading-one' | 'heading-two'
+               | 'block-quote' | 'numbered-list' | 'bulleted-list'
+
+const HOTKEYS: { [p: string]: string } = {
   'mod+b': 'bold',
   'mod+i': 'italic',
   'mod+u': 'underline',
@@ -20,6 +23,20 @@ const DawnEditor: FC = () => {
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const [value, setValue] = useState<Node[]>(initialValue)
 
+  const isMarkActive = (editor: Editor, format: TFormat) => {
+    const marks = Editor.marks(editor)
+    return marks ? marks[format] === true : false
+  }
+
+  const toggleMark = (editor: Editor, format: TFormat) => {
+    const isActive = isMarkActive(editor, format)
+    if (isActive) {
+      Editor.removeMark(editor, format)
+    } else {
+      Editor.addMark(editor, format, true)
+    }
+  }
+
   return (
     <div className='dawn-container'>
       <Slate editor={editor} value={value} onChange={v => setValue(v)}>
@@ -29,15 +46,15 @@ const DawnEditor: FC = () => {
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           placeholder="Enter some rich text…"
-          // onKeyDown={(event) => {
-          //   for (const hotkey in HOTKEYS) {
-          //     if (isHotkey(hotkey, event.nativeEvent)) {
-          //       event.preventDefault()
-          //       const mark = HOTKEYS[hotkey]
-          //       toggleMark(editor, mark)
-          //     }
-          //   }
-          // }}
+          onKeyDown={(event) => {
+            for (const hotkey in HOTKEYS) {
+              if (isHotkey(hotkey, event.nativeEvent)) {
+                event.preventDefault()
+                const mark = HOTKEYS[hotkey] as TFormat
+                toggleMark(editor, mark)
+              }
+            }
+          }}
         />
       </Slate>
     </div>
